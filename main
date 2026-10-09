@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сердце в тишине — Арина Бугрик</title>
+<meta name="description" content="Стихотворение Арины Бугрик. Никто не отвечает ни за что...">
+<meta name="author" content="Арина Бугрик">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    background: #0a0e14;
+    color: #e8e4dc;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .background {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: linear-gradient(
+      180deg,
+      #060a12 0%,
+      #0d1520 25%,
+      #1a1a22 50%,
+      #2a211a 75%,
+      #3d2a18 90%,
+      #5a3a1a 100%
+    );
+    background-attachment: fixed;
+  }
+
+  .glow {
+    position: fixed;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 60%;
+    z-index: -1;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 170, 80, 0.18) 0%,
+      rgba(255, 140, 60, 0.08) 30%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .snow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .snowflake {
+    position: absolute;
+    top: -10px;
+    color: rgba(200, 220, 255, 0.35);
+    font-size: 1em;
+    user-select: none;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-10px) translateX(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 0.6; }
+    100% {
+      transform: translateY(110vh) translateX(40px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 12vh 2rem 18vh;
+    position: relative;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: fadeIn 1.5s ease 0.2s forwards;
+  }
+
+  .author {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #8a9aab;
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    font-weight: 500;
+    font-style: italic;
+    color: #d8e0e8;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    margin-bottom: 1.2rem;
+  }
+
+  .date {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: #5f6d7d;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 600px) {
+    .title { font-size: 2.8rem; }
+  }
+
+  /* Строфы — центрированы */
+  .verse {
+    margin-bottom: 3.2rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1.2s ease forwards;
+  }
+
+  .verse:nth-child(2) { animation-delay: 0.6s; }
+  .verse:nth-child(3) { animation-delay: 1.0s; }
+  .verse:nth-child(4) { animation-delay: 1.4s; }
+  .verse:nth-child(5) { animation-delay: 1.8s; }
+  .verse:nth-child(6) { animation-delay: 2.2s; }
+  .verse:nth-child(7) { animation-delay: 2.6s; }
+
+  .verse p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: #cfd6de;
+    margin-bottom: 0.15rem;
+    letter-spacing: 0.01em;
+  }
+
+  @media (min-width: 600px) {
+    .verse p { font-size: 1.4rem; }
+  }
+
+  .verse.cold p {
+    text-shadow: 0 0 20px rgba(120, 160, 220, 0.08);
+  }
+
+  .verse.final {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 180, 100, 0.15);
+    text-align: center;
+  }
+
+  .verse.final p {
+    color: #f0d8b8;
+    text-shadow: 0 0 30px rgba(255, 170, 80, 0.15);
+    font-size: 1.3rem;
+    line-height: 2;
+  }
+
+  @media (min-width: 600px) {
+    .verse.final p { font-size: 1.5rem; }
+  }
+
+  .review {
+    margin-top: 7rem;
+    padding-top: 3.5rem;
+    border-top: 1px solid rgba(180, 150, 110, 0.18);
+    opacity: 0;
+    animation: fadeIn 1.5s ease 3.4s forwards;
+  }
+
+  .review-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: #7a6a52;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .review-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: #a8b0ba;
+    text-align: left;
+    max-width: 560px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+
+  .review-text p { margin-bottom: 1.3rem; }
+  .review-text p:last-child { margin-bottom: 0; }
+
+  @media (min-width: 600px) {
+    .review-text { font-size: 1.18rem; }
+  }
+
+  .economics {
+    margin-top: 7rem;
+    padding-top: 3.5rem;
+    border-top: 1px solid rgba(120, 160, 200, 0.15);
+    opacity: 0;
+    animation: fadeIn 1.5s ease 4.2s forwards;
+  }
+
+  .econ-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #6d8aa8;
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .econ-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #d0dce8;
+    text-align: center;
+    margin-bottom: 3rem;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+
+  @media (min-width: 600px) {
+    .econ-title { font-size: 1.8rem; }
+  }
+
+  .econ-intro {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #9aa8b8;
+    margin-bottom: 3rem;
+    letter-spacing: 0.005em;
+  }
+
+  .econ-item {
+    margin-bottom: 2.6rem;
+    padding-left: 1.2rem;
+    border-left: 2px solid rgba(109, 138, 168, 0.25);
+    transition: border-color 0.3s ease;
+  }
+
+  .econ-item:hover {
+    border-left-color: rgba(109, 138, 168, 0.55);
+  }
+
+  .econ-item h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    color: #b8c8d8;
+    margin-bottom: 0.7rem;
+  }
+
+  .econ-item h3 .term {
+    font-weight: 400;
+    color: #8aa8c8;
+    font-style: normal;
+  }
+
+  .econ-item p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #8a98a8;
+    letter-spacing: 0.005em;
+  }
+
+  .econ-item p + p {
+    margin-top: 0.9rem;
+  }
+
+  .econ-item em {
+    font-style: normal;
+    color: #a8bcd0;
+  }
+
+  .econ-outro {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #9aa8b8;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(109, 138, 168, 0.15);
+  }
+
+  @media (min-width: 600px) {
+    .econ-intro, .econ-outro { font-size: 1.05rem; }
+    .econ-item h3 { font-size: 1rem; }
+    .econ-item p { font-size: 1rem; }
+  }
+
+  footer {
+    margin-top: 6rem;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: #6a7686;
+    opacity: 0;
+    animation: fadeIn 1.5s ease 4.8s forwards;
+  }
+
+  footer a {
+    color: #8a9aab;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(138, 154, 171, 0.3);
+    padding-bottom: 1px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  footer a:hover {
+    color: #d8e0e8;
+    border-color: rgba(216, 224, 232, 0.5);
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+    .verse, header, footer, .review, .economics {
+      opacity: 1;
+      transform: none;
+    }
+    .snow { display: none; }
+  }
+
+  ::selection {
+    background: rgba(255, 170, 80, 0.25);
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<div class="background"></div>
+<div class="glow"></div>
+
+<div class="snow" id="snow"></div>
+
+<div class="container">
+
+  <header>
+    <div class="author">Арина Бугрик</div>
+    <h1 class="title">Сердце в тишине</h1>
+    <div class="date">09.10.2026, 15:31, Пт</div>
+  </header>
+
+  <main>
+    <div class="verse cold">
+      <p>Никто не отвечает ни за что.</p>
+      <p>Царит безволие и ложь повсюду.</p>
+      <p>Никто не будет думать «как вы там» —</p>
+      <p>Всё только бизнес, деньги, деньги, срам.</p>
+    </div>
+
+    <div class="verse cold">
+      <p>Никто не отвечает ни за что.</p>
+      <p>Везде обман, не видящий границ.</p>
+      <p>Когда курьер спешит к тебе домой,</p>
+      <p>Он видит только деньги, деньги, бизнес.</p>
+    </div>
+
+    <div class="verse cold">
+      <p>Ему не важно «как ты, где ты, сколько ждёшь».</p>
+      <p>Ему важнее только деньги, деньги, прибыль.</p>
+      <p>А может, к лучшему оно, герой:</p>
+      <p>Никто не просит требовать сверх силы.</p>
+    </div>
+
+    <div class="verse cold">
+      <p>Ведь деньги — пропуск в мир иной,</p>
+      <p>В мир банков, больших денег и амбиций.</p>
+      <p>Никто не делает шага, пока зарплата не пришла,</p>
+      <p>И всё повторяется по кругу, как во время вьюги.</p>
+    </div>
+
+    <div class="verse final">
+      <p>Вот, вьюга за окном прошла. Герой пришёл домой.</p>
+      <p>Дома так тепло и нужен наш герой.</p>
+      <p>Герой сидит у печки, пьёт чай из трав лесных</p>
+      <p>И сердце в благочестии, и сердце в тишине.</p>
+    </div>
+  </main>
+
+  <section class="review">
+    <div class="review-label">Рецензия</div>
+    <div class="review-text">
+      <p>Этот текст начинается как крик — как выдох боли и усталости. Первая часть почти плакат, почти манифест отчаяния, где мир описан через отрицание: никто, нигде, никогда. Здесь нет полутонов, и в этом своя правда, потому что отчаяние действительно их не знает. Но поэзией текст делает вторая часть — та, где появляется дом, печка, чай и тишина. Это не просто смена декорации, а смена оптики: от взгляда на мир к взгляду внутрь себя.</p>
+      <p>Герой не побеждает систему и не разоблачает ложь. Он просто возвращается домой, и это возвращение оказывается важнее любых социальных битв. В мире, где никто ни за что не отвечает, можно всё-таки ответить за одну печку, за один чайник, за одно сердце. И этого достаточно, чтобы вьюга однажды прошла.</p>
+    </div>
+  </section>
+
+  <section class="economics">
+    <div class="econ-label">Экономический смысл</div>
+    <h2 class="econ-title">Что описывает текст, если читать его как экономику</h2>
+
+    <p class="econ-intro">Это стихотворение — точная иллюстрация нескольких базовых экономических концепций. Причём не напрямую, а через живые образы: курьера, зарплату, печку и чай. Автор не обращается к экономической теории намеренно — перед нами стих, а не трактат. Но язык, которым описан мир, удивительно точно совпадает с тем, как этот мир описывает экономическая наука, и в первую очередь — марксистская политическая экономия, для которой «Капитал» был попыткой разобрать капитализм не как моральную проблему, а как работающую систему.</p>
+
+    <div class="econ-item">
+      <h3>Товарный фетишизм <span class="term">— «деньги, деньги, бизнес»</span></h3>
+      <p>Маркс в первом томе «Капитала» вводит понятие товарного фетишизма: при капитализме отношения между людьми принимают форму отношений между вещами. Курьер видит не тебя, а деньги; ты видишь не курьера, а функцию доставки. Вещь — деньги, товар, прибыль — заслоняет человека. В стихотворении это схвачено почти дословно: «Он видит только деньги, деньги, бизнес». Это не чёрствость конкретного работника, а способ, которым система заставляет смотреть на мир.</p>
+    </div>
+
+    <div class="econ-item">
+      <h3>Отчуждение труда <span class="term">— «ему не важно, как ты, где ты, сколько ждёшь»</span></h3>
+      <p>В «Экономическо-философских рукописях» Маркс описывает отчуждение как разрыв сразу нескольких связей: работник отчуждён от продукта своего труда, от самого процесса, от своей сущности и от других людей. Курьер в стихотворении — идеальный пример четвёртого типа отчуждения: он не видит в тебе человека, потому что его труд устроен так, что человек в нём не помещается. Это не его выбор, это форма, в которую вписан его день.</p>
+    </div>
+
+    <div class="econ-item">
+      <h3>Потребительная и меновая стоимость <span class="term">— «сколько ждёшь» против «сколько платят»</span></h3>
+      <p>В «Капитале» Маркс различает потребительную стоимость (полезность вещи для человека) и меновую стоимость (пропорцию, в которой она обменивается на другую). Твоё ожидание курьера имеет потребительную стоимость — оно важно тебе. Но для системы оно не имеет меновой стоимости: оно не входит в цену доставки. В стихотворении это противоречие звучит в строке «Ему не важно, как ты, где ты, сколько ждёшь» — время ожидания не оплачивается, а значит, его как бы нет.</p>
+    </div>
+
+    <div class="econ-item">
+      <h3>Капитал как самовозрастающая стоимость <span class="term">— «деньги пропуск в мир иной»</span></h3>
+      <p>Маркс определяет капитал не как просто деньги, а как стоимость, которая приносит прибавочную стоимость, то есть растёт. Деньги в стихотворении — не средство обмена, а именно капитал: они открывают «пропуск в мир иной», в «мир банков, больших денег и амбиций». Это описание той самой логики самовозрастания, где деньги перестают быть инструментом и становятся целью. Строка «Никто не делает шага, пока зарплата не пришла» показывает обратную сторону этой логики: пока капитал не запустил цикл, жизнь стоит на паузе.</p>
+    </div>
+
+    <div class="econ-item">
+      <h3>Резервная армия труда <span class="term">— «никто не просит требовать сверх силы»</span></h3>
+      <p>В «Капитале» Маркс описывает резервную армию труда: избыток работников, готовых занять место любого, кто выпал из процесса. Эта армия держит заработную плату на уровне выживания и делает работника сменяемым. В стихотворении это звучит почти как приговор: «Никто не просит требовать сверх силы». Тебя не просят напрягаться — потому что на твоё место всегда есть другой. Именно поэтому никто ни за что не отвечает: ответственность растворяется в сменяемости.</p>
+    </div>
+
+    <div class="econ-item">
+      <h3>Прекариат и экономика ожидания <span class="term">— «пока зарплата не пришла»</span></h3>
+      <p>Современная экономика описывает прекариат — класс людей с нестабильной занятостью, живущих без долгосрочных гарантий. Строка «Никто не делает шага, пока зарплата не пришла» — точная формула этого состояния. Ты не планируешь, не строишь, не рискуешь, ты ждёшь. Курьер, который спешит, и человек, который ждёт зарплату, — две стороны одной медали: оба подчинены внешнему ритму, заданному не ими.</p>
+    </div>
+
+    <div class="econ-item">
+      <h3>Транзакционные издержки и дефицит доверия <span class="term">— «никто не отвечает ни за что»</span></h3>
+      <p>Институциональная экономика измеряет стоимость сделки не только ценой товара, но и издержками на контроль, защиту, проверку. Когда в обществе нет доверия, каждая сделка дорожает: нужны договоры, юристы, гарантии. Рефрен «Никто не отвечает ни за что» описывает общество с нулевым доверием, где издержки максимальны, а выгода — минимальна. Парадокс в том, что это невыгодно всем, но выйти из этого состояния рационально невозможно: каждый по отдельности проигрывает, если начнёт доверять первым.</p>
+    </div>
+
+    <div class="econ-item">
+      <h3>Экономика дара и реципрокность <span class="term">— «дома так тепло и нужен наш герой»</span></h3>
+      <p>Финал с печкой, чаем и травами — описание того, что находится за пределами рынка. Травы собраны в лесу, чай заварен дома, печка даёт тепло не по тарифу. Антропологи называют это реципрокностью — отношениями, в которых ценность создаётся не обменом, а самим фактом присутствия. «Нужен наш герой» — это не про спрос и предложение, это про то, что в системе, где ты никому не нужен как работник или клиент, ты можешь быть нужен как человек. Только не на рынке, а дома.</p>
+    </div>
+
+    <p class="econ-outro">Главный парадокс, который схватывает стихотворение: мир, описанный в первой части, абсолютно рационален. Курьер спешит, потому что за это платят. Люди ждут зарплату, потому что иначе нельзя. Деньги правят, потому что они действительно решают. Это не глупость и не злоба — это логика системы, и Маркс описал её именно как логику, а не как заговор. Но финал показывает, что у этой логики есть граница. Не потому, что она плохая, а потому, что человек не сводится к ней. Экономика описывает поведение, но не исчерпывает жизнь. Дом, печка и чай — это не бегство от экономики, это напоминание о том, что она — не всё.</p>
+  </section>
+
+  <footer>
+    © Арина Бугрик — <a href="https://stihi.ru/avtor/rishas" target="_blank" rel="noopener">Стихи.ру</a>
+  </footer>
+
+</div>
+
+<script>
+  (function() {
+    const snowContainer = document.getElementById('snow');
+    if (!snowContainer) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const count = 40;
+    const chars = ['·', '•', '❄', '❅', '❆', '*'];
+
+    for (let i = 0; i < count; i++) {
+      const flake = document.createElement('div');
+      flake.className = 'snowflake';
+      flake.textContent = chars[Math.floor(Math.random() * chars.length)];
+      flake.style.left = Math.random() * 100 + '%';
+      flake.style.fontSize = (Math.random() * 0.8 + 0.4) + 'em';
+      flake.style.animationDuration = (Math.random() * 12 + 10) + 's';
+      flake.style.animationDelay = (Math.random() * 15) + 's';
+      flake.style.opacity = Math.random() * 0.5 + 0.1;
+      snowContainer.appendChild(flake);
+    }
+  })();
+</script>
+
+</body>
+</html>
